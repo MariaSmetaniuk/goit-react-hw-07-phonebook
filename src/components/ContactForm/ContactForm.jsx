@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addContact } from 'redux/operations';
 import { selectContacts } from 'redux/selectors';
 import { Formik } from 'formik';
 import { Box } from 'components/Box';
@@ -11,6 +12,7 @@ const initialValues = {
 };
 
 export const ContactForm = () => {
+  const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
 
   const handleSubmit = ({ name, number }, actions) => {
@@ -21,7 +23,7 @@ export const ContactForm = () => {
       return;
     }
 
-    // dispatch(addContact({ name, number }));
+    dispatch(addContact({ name, phone: number }));
     actions.resetForm();
   };
 

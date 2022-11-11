@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/operations';
 // selectors
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectIsContacts, selectIsContactsShown } from 'redux/selectors';
 //styles
 import { GlobalStyle } from './GlobalStyle';
@@ -11,6 +13,12 @@ import { ContactList } from './ContactList/ContactList';
 import { Notification } from './Notification/Notification';
 
 export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   const isContacts = useSelector(selectIsContacts);
   const isContactsShown = useSelector(selectIsContactsShown);
   return (
