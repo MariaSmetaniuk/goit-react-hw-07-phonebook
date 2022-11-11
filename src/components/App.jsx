@@ -1,6 +1,6 @@
+// selectors
 import { useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
-import { useFilteredContacts } from 'hooks/useFilteredContacts';
+import { selectIsContacts, selectIsContactsShown } from 'redux/selectors';
 //styles
 import { GlobalStyle } from './GlobalStyle';
 //components
@@ -11,11 +11,8 @@ import { ContactList } from './ContactList/ContactList';
 import { Notification } from './Notification/Notification';
 
 export const App = () => {
-  const contacts = useSelector(getContacts);
-  const filteredContacts = useFilteredContacts();
-  const isContacts = contacts.length > 0;
-  const isContactsShown = isContacts && filteredContacts.length > 0;
-
+  const isContacts = useSelector(selectIsContacts);
+  const isContactsShown = useSelector(selectIsContactsShown);
   return (
     <Box p={5} as="main">
       <Box

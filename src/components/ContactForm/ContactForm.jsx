@@ -1,8 +1,7 @@
+import { useSelector } from 'react-redux';
+import { selectContacts } from 'redux/selectors';
 import { Formik } from 'formik';
 import { Box } from 'components/Box';
-import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/contacts/contactsSlice';
 import { Button } from 'components/Button/Button.styled';
 import { Input, Label, FormStyled } from './ContactForm.styled';
 
@@ -12,8 +11,7 @@ const initialValues = {
 };
 
 export const ContactForm = () => {
-  const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = ({ name, number }, actions) => {
     const isContactAdded = contacts.find(contact => name === contact.name);
@@ -23,7 +21,7 @@ export const ContactForm = () => {
       return;
     }
 
-    dispatch(addContact({ name, number }));
+    // dispatch(addContact({ name, number }));
     actions.resetForm();
   };
 
