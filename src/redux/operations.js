@@ -25,6 +25,19 @@ export const addContact = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
+  },
+  {
+    condition: (contact, { getState }) => {
+      const { contacts } = getState();
+
+      const isContactAdded = contacts.items.find(
+        item => item.name === contact.name
+      );
+      if (isContactAdded) {
+        alert(`${contact.name} is already in contacts.`);
+        return false;
+      }
+    },
   }
 );
 
