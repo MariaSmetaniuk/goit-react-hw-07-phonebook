@@ -28,7 +28,7 @@ export const App = () => {
   const isContacts = useSelector(selectIsContacts);
   const isContactsShown = useSelector(selectIsContactsShown);
   const isLoading = useSelector(selectIsLoading);
-  const Error = useSelector(selectError);
+  const errorMessage = useSelector(selectError);
 
   return (
     <Box p={5} as="main">
@@ -45,7 +45,7 @@ export const App = () => {
         <ContactForm />
         <h2>Contacts</h2>
         <Box mt={4}>
-          {Error && <p>{Error}</p>}
+          {errorMessage && <p>{errorMessage}</p>}
           {isContacts && <Filter />}
           {isLoading && <Loader />}
           {isContactsShown && <ContactList />}
