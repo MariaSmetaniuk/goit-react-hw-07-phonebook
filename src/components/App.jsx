@@ -2,7 +2,11 @@ import { useEffect } from 'react';
 import { fetchContacts } from 'redux/operations';
 // selectors
 import { useSelector, useDispatch } from 'react-redux';
-import { selectIsContacts, selectIsContactsShown } from 'redux/selectors';
+import {
+  selectIsContacts,
+  selectIsContactsShown,
+  selectIsLoading,
+} from 'redux/selectors';
 //styles
 import { GlobalStyle } from './GlobalStyle';
 //components
@@ -11,6 +15,7 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { Notification } from './Notification/Notification';
+import { Loader } from './Loader/Loader';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -21,6 +26,7 @@ export const App = () => {
 
   const isContacts = useSelector(selectIsContacts);
   const isContactsShown = useSelector(selectIsContactsShown);
+  const isLoading = useSelector(selectIsLoading);
   return (
     <Box p={5} as="main">
       <Box
@@ -37,8 +43,9 @@ export const App = () => {
         <h2>Contacts</h2>
         <Box mt={4}>
           {isContacts && <Filter />}
+          {isLoading && <Loader />}
           {isContactsShown && <ContactList />}
-          {!isContacts && <Notification />}
+          {!isContacts && !isLoading && <Notification />}
         </Box>
       </Box>
       <GlobalStyle />
