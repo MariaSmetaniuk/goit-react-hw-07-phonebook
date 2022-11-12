@@ -1,11 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as API from 'services/api';
-// fetchContacts - одержання масиву контактів (метод GET) запитом. Базовий тип екшену "contacts/fetchAll".
-// addContact - додавання контакту (метод POST). Базовий тип екшену "contacts/addContact".
-// deleteContact - видалення контакту (метод DELETE). Базовий тип екшену "contacts/deleteContact".
 
 export const fetchContacts = createAsyncThunk(
-  'contacts/fetchContacts',
+  'contacts/fetchAll',
   async (_, thunkAPI) => {
     try {
       const data = await API.getContacts();
